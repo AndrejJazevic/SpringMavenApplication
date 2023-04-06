@@ -1,11 +1,18 @@
 package com.maven;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
+
+@EnableTransactionManagement
 public class Main {
+    private static AnnotationConfigApplicationContext ctx;
+
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+
+        ctx = new AnnotationConfigApplicationContext();
+        ctx.register(AppConfig.class);
+        ctx.refresh();
+        System.out.println("Hello");
     }
 }

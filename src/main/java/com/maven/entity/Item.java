@@ -7,9 +7,23 @@ import java.util.List;
 @Entity
 @Table(name = "Item")
 public class Item implements Serializable {
-    @GeneratedValue
+    public Item() {}
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private Double price;
+
+    @Column(nullable = false)
+    private Integer amount;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Order> order_items;
 
     public Long getId() {
         return id;
@@ -19,50 +33,35 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private String Name;
-
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Double Price;
-
     public Double getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(Double price) {
-        Price = price;
+        this.price = price;
     }
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Integer Amount;
-
     public Integer getAmount() {
-        return Amount;
+        return amount;
     }
 
     public void setAmount(Integer amount) {
-        Amount = amount;
+        this.amount = amount;
     }
 
-    @ManyToMany(mappedBy = "items")
-    private List<Order> orderitems;
-
-    public List<Order> getOrderitems() {
-        return orderitems;
+    public List<Order> getOrder_items() {
+        return order_items;
     }
 
-    public void setOrderitems(List<Order> orderitems) {
-        this.orderitems = orderitems;
+    public void setOrder_items(List<Order> order_items) {
+        this.order_items = order_items;
     }
 }

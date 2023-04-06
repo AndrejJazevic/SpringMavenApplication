@@ -8,9 +8,22 @@ import java.util.List;
 @Entity
 @Table(name = "Order")
 public class Order implements Serializable {
-    @GeneratedValue
+    public Order() {}
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private LocalDate order_date;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToMany
+    @JoinTable(name = "Order_items", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<Item> items;
 
     public Long getId() {
         return id;
@@ -20,21 +33,13 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private LocalDate Order_date;
-
     public LocalDate getOrder_date() {
-        return Order_date;
+        return order_date;
     }
 
     public void setOrder_date(LocalDate order_date) {
-        Order_date = order_date;
+        this.order_date = order_date;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
     public Customer getCustomer() {
         return customer;
@@ -43,10 +48,6 @@ public class Order implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    @ManyToMany
-    @JoinTable(name = "Order_items", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private List<Item> items;
 
     public List<Item> getItems() {
         return items;

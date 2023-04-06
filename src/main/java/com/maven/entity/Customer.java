@@ -5,12 +5,25 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "Customer")
 public class Customer implements Serializable {
     public Customer() {}
 
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String firstname;
+
+    @Column(nullable = false)
+    private String lastname;
+
+    @Column(unique = true)
+    private String personal_code;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -20,44 +33,29 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private String Firstname;
-
     public String getName() {
-        return Firstname;
+        return firstname;
     }
 
-    public void setName(String name) {
-        Firstname = name;
+    public void setName(String firstname) {
+        this.firstname = firstname;
     }
-
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private String Surname;
 
     public String getSurname() {
-        return Surname;
+        return lastname;
     }
 
-    public void setSurname(String surname) {
-        Surname = surname;
+    public void setSurname(String lastname) {
+        this.lastname = lastname;
     }
-
-    @Basic
-    @Column(unique = true)
-    private String Personal_code;
 
     public String getPersonal_code() {
-        return Personal_code;
+        return personal_code;
     }
 
     public void setPersonal_code(String personal_code) {
-        Personal_code = personal_code;
+        this.personal_code = personal_code;
     }
-
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
 
     public List<Order> getOrders() {
         return orders;

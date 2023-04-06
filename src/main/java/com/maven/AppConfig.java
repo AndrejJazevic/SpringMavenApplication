@@ -1,7 +1,5 @@
-
 package com.maven;
 
-import org.hibernate.jpamodelgen.xml.jaxb.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,11 +9,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
 import org.springframework.orm.jpa.persistenceunit.PersistenceUnitManager;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.spi.PersistenceUnitInfo;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -42,6 +42,7 @@ public class AppConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(ds);
         factory.setJpaProperties(properties());
+        factory.setPersistenceUnitManager(persistenceUnitManager());
         factory.setPackagesToScan("com.maven.entity");
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         return factory;
@@ -54,7 +55,6 @@ public class AppConfig {
         properties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
         properties.setProperty("hibernate.use_sql_comments", env.getRequiredProperty("hibernate.use_sql_comments"));
-        //properties.setProperty("spring.jpa.hibernate.ddl-auto", env.getRequiredProperty("spring.jpa.hibernate.ddl-auto"));
         return properties;
     }
 
@@ -65,8 +65,12 @@ public class AppConfig {
         return transactionManager;
     }
 
-    /*public PersistenceUnitManager persistenceUnitManager(){
-
-    }*/
+    @Bean
+    public PersistenceUnitManager persistenceUnitManager(){
+        DefaultPersistenceUnitManager persistenceUnitManager = new DefaultPersistenceUnitManager();
+        persistenceUnitManager.setPersistenceXmlLocation("classpath*:/META-INF/persistence.xml");
+        persistenceUnitManager.setDefaultDataSource(dataSource());
+        return persistenceUnitManager;
+    }
 }
 

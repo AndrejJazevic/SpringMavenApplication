@@ -33,19 +33,19 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setName(String firstname) {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    public String getSurname() {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setSurname(String lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
@@ -63,5 +63,11 @@ public class Customer implements Serializable {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", firstname='" + firstname + '\'' + ", lastname='" + lastname +
+                '\'' + ", personal_code='" + personal_code + '\'' + "}";
     }
 }

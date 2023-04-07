@@ -56,4 +56,9 @@ public class Order implements Serializable {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", order_date='" + order_date + '\'' + ", customer_id=" + customer + "}";
+    }
 }

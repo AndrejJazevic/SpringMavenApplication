@@ -64,4 +64,10 @@ public class Item implements Serializable {
     public void setOrder_items(List<Order> order_items) {
         this.order_items = order_items;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", name='" + name + '\'' + ", price=" + price
+                + ", amount=" + amount + "}";
+    }
 }

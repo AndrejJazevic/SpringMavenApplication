@@ -102,7 +102,7 @@ select * from item where item.id in
             // pvz. po delete arba po perssite bet dar prieš commit
             em.detach(item);
 
-            em.createQuery("select * from dual").getResultList();
+            //em.createQuery("select * from dual").getResultList();
         }
 
     }

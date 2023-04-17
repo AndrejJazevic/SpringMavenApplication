@@ -1,3 +1,3 @@
 # SpringMavenApplication
 
-A primitive Spring-JPA-Maven project.
+A simple Spring-JPA-Data maven project.

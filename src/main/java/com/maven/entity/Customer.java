@@ -22,7 +22,7 @@ public class Customer implements Serializable {
     @Column(unique = true)
     private String personal_code;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public Long getId() {

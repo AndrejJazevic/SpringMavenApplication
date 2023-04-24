@@ -1,7 +1,6 @@
 package com.maven.repository;
 
-import com.maven.entity.Customer;
-import com.maven.entity.Customer_;
+import com.maven.entity.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -81,6 +80,28 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
     public Customer findCustomerById(Long id){
         Customer customer = em.find(Customer.class, id);
+        return customer;
+    }
+    public Customer findAllCustomersByItemId(Long id){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = cb.createQuery(Long.class);
+        Item item = em.find(Item.class, id);
+
+        Root<Order> root = query.from(Order.class);
+
+        Predicate predicate = cb.equal(root.get(Order_.items), item);
+        query.where(predicate);
+        query.select(root.get(Order_.id));
+
+        TypedQuery<Long> q = em.createQuery(query);
+        List<Long> resultList = q.getResultList();
+        System.out.println(resultList);
+        return null;
+    }
+    public Customer updateCustomerId(Long oldId, Long newId){
+        Customer customer = em.find(Customer.class, oldId);
+        customer.setId(newId);
+        em.merge(customer);
         return customer;
     }
 }

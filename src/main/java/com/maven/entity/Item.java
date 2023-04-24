@@ -2,7 +2,8 @@ package com.maven.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Item")
@@ -23,7 +24,7 @@ public class Item implements Serializable {
     private Integer amount;
 
     @ManyToMany(mappedBy = "items")
-    private List<Order> order_items;
+    private Set<Order> order_items = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -57,11 +58,11 @@ public class Item implements Serializable {
         this.amount = amount;
     }
 
-    public List<Order> getOrder_items() {
+    public Set<Order> getOrder_items() {
         return order_items;
     }
 
-    public void setOrder_items(List<Order> order_items) {
+    public void setOrder_items(Set<Order> order_items) {
         this.order_items = order_items;
     }
 

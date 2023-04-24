@@ -1,22 +1,21 @@
 package com.maven;
 
-import com.maven.entity.Customer;
-import com.maven.entity.Customer_;
-import com.maven.repository.CustomerRepositoryImpl;
-import com.maven.repository.ItemRepositoryImpl;
-import com.maven.repository.OrderRepositoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+//import com.maven.entity.Customer;
+//import com.maven.entity.Customer;
+//import com.maven.repository.CustomerRepositoryImpl;
+//import com.maven.repository.ItemRepositoryImpl;
+//import com.maven.repository.OrderRepositoryImpl;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.List;
 
-@SpringBootApplication
-@EnableTransactionManagement
-public class SpBootApp implements CommandLineRunner {
-
+//@SpringBootApplication
+public class SpBootApp {
+/*
     @Autowired
     private CustomerRepositoryImpl customerRepository;
     @Autowired
@@ -31,7 +30,7 @@ public class SpBootApp implements CommandLineRunner {
     @Override
     public void run(String... args){
 
-        System.out.println(orderRepository.getOrCreateOrder(Long.valueOf(50)));
+      //  System.out.println(orderRepository.getOrCreateOrder(Long.valueOf(50)));
 
 //        //Insert into Customer (*) values ("", "", "")
 //        customerRepository.addCustomer("as", "esu", "9090");
@@ -61,6 +60,9 @@ public class SpBootApp implements CommandLineRunner {
 //            //Delete from Customer where Id = ***
 //            System.out.println("Deleted: " + customerRepository.deleteCustomerById(id));
 //        }
-//        System.out.println("Deleted: " + customerRepository.deleteCustomerById(Long.valueOf(3)));
+
+        System.out.println("Deleted: " + customerRepository.deleteCustomerById(3L));
     }
+    /*
+ */
 }

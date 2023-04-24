@@ -11,4 +11,6 @@ public interface CustomerRepository {
     List<Long> findCustomerIdByName(String firstname);
     Customer updateCustomerFirstnameAndLastnameById(String firstname, String lastname, Long id);
     Customer findCustomerById(Long id);
+    Customer findAllCustomersByItemId(Long id);
+    Customer updateCustomerId(Long oldId, Long newId);
 }

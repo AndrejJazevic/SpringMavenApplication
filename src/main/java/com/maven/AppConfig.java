@@ -1,5 +1,6 @@
 package com.maven;
 
+import com.maven.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -46,7 +47,7 @@ public class AppConfig {
         factory.setDataSource(ds);
         factory.setJpaProperties(properties());
         factory.setPersistenceUnitManager(persistenceUnitManager());
-        factory.setPackagesToScan("com.maven.entity");
+        factory.setPackagesToScan(Order.class.getPackageName());
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         //factory.setJpaVendorAdapter(jpaVendorAdapter());
         return factory;
@@ -62,7 +63,7 @@ public class AppConfig {
     @Bean
     public PersistenceUnitManager persistenceUnitManager(){
         DefaultPersistenceUnitManager persistenceUnitManager = new DefaultPersistenceUnitManager();
-        persistenceUnitManager.setPersistenceXmlLocation("classpath*:/META-INF/persistence.xml");
+        persistenceUnitManager.setPersistenceXmlLocation("classpath*:/META-INF/_persistence.xml");
         persistenceUnitManager.setDefaultDataSource(dataSource());
         return persistenceUnitManager;
     }
@@ -72,8 +73,8 @@ public class AppConfig {
         properties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         properties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-        properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-        properties.setProperty("hibernate.use_sql_comments", env.getRequiredProperty("hibernate.use_sql_comments"));
+//        properties.setProperty("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+//        properties.setProperty("hibernate.use_sql_comments", env.getRequiredProperty("hibernate.use_sql_comments"));
         return properties;
     }
 

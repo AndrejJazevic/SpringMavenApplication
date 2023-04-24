@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ItemRepository{
     List<Item> findAllItems();
+
+    List<Item> findAllAddedItemsByCustomerId(Long id);
 }
